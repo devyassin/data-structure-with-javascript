@@ -50,5 +50,28 @@ const sameTwo = (arr1, arr2) => {
   return true;
 };
 
-c(sameTwo([1, 2, 5, 3, 3], [1, 9, 25, 9, 4]));
+//Given two positive integers, find out if the two numbers have the same frequency of digits.
+
+const sameFrequency = (num1, num2) => {
+  if (num1.length !== num2.length) return false;
+
+  const frequencyCounter1 = new Map();
+  const frequencyCounter2 = new Map();
+
+  for (const val1 of num1) {
+    frequencyCounter1.set(val1, (frequencyCounter1.get(val1) || 0) + 1);
+  }
+
+  for (const val2 of num2) {
+    frequencyCounter2.set(val2, (frequencyCounter2.get(val2) || 0) + 1);
+  }
+
+  for (const val1 of num1) {
+    if (frequencyCounter1.get(val1) !== frequencyCounter2.get(val1))
+      return false;
+  }
+  return true;
+};
+
+c(sameFrequency("3589578", "5879385"));
 // c(same([1, 2, 3, 3], [1, 9, 9, 4]));

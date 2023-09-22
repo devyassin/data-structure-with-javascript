@@ -79,4 +79,58 @@ const countUniqueValuesTwo = (arr) => {
   return uniqueValues.size;
 };
 
-c(countUniqueValuesTwo([-1, 2, 1, 2, 2, 3, 3, 3, 5, 6]));
+//accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in
+
+const areThereDuplicates = (...args) => {
+  const sortedArgs = args.sort();
+  let currentPointer = 0;
+  let nextPointer = 1;
+
+  while (nextPointer < sortedArgs.length) {
+    if (sortedArgs[currentPointer] === sortedArgs[nextPointer]) {
+      return true;
+    }
+    currentPointer++;
+    nextPointer++;
+  }
+  return false;
+};
+
+//fast solution
+const areThereDuplicatesTwo = (...args) => {
+  return new Set(args).size !== args.length;
+};
+
+//Given a sorted array of integers and a target average, determine if there is a pair of values in the array where the average of the pair equals the target average.
+
+const averagePair = (arr, num) => {
+  const sortedArr = arr.sort();
+  let right = sortedArr.length - 1;
+  let left = 0;
+
+  while (left < right) {
+    let avg = (arr[left] + arr[right]) / 2;
+    if (avg === num) {
+      return true;
+    } else if (avg < num) {
+      left++;
+    } else if (avg > num) {
+      right--;
+    }
+  }
+  return false;
+};
+
+function isSubsequence(str1, str2) {
+  let i = 0;
+  let j = 0;
+  if (!str1) return true;
+  while (j < str2.length) {
+    if (str2[j] === str1[i]) i++;
+    if (i === str1.length) return true;
+    j++;
+  }
+  return false;
+}
+// -1,2,4,5,1,0,7
+c(isSubsequence("hello", "hel hel world"));

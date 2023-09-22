@@ -22,4 +22,31 @@ const maxSubArraySum = (arr, num) => {
   return maxSum;
 };
 
-c(maxSubArraySum([4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15], 3));
+/* This function should return the minimal length of a contiguous 
+subarray of which the sum is greater than or equal to the integer passed to the function */
+
+const minSubArrayLen = (arr, num) => {
+  if (num < 0) return 0;
+  for (const val of arr) {
+    if (val < 0) return 0;
+  }
+
+  let minLength = Infinity;
+  let tempSum = 0;
+  let left = 0;
+
+  for (let right = 0; right < arr.length; right++) {
+    tempSum += arr[right];
+    while (tempSum >= num) {
+      tempSum -= arr[left];
+      minLength = Math.min(minLength, right - left + 1);
+      left++;
+    }
+  }
+
+  return minLength;
+};
+
+// accepts a string and returns the length of the longest substring with all distinct characters.
+
+// c(findLongestSubstring("rithmschool"));

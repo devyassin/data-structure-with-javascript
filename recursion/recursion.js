@@ -73,4 +73,105 @@ const fibTwo = (num) => {
   return fib(n - 1) + fib(n - 2);
 };
 
-c(fib(28));
+// hard problems recursion
+//Write a recursive function called reverse which accepts a string and returns a new string in reverse.
+
+// first attempt
+const reverse = (str) => {
+  const strArray = str.split("");
+  const result = [];
+  let counter = 1;
+  const helper = () => {
+    if (strArray.length === result.length) return;
+    result.push(strArray[strArray.length - counter]);
+    counter++;
+    helper();
+  };
+  helper();
+  return result.join("");
+};
+
+// second attempt
+
+const reverseTwo = (str) => {
+  // base case
+  if (str === "") return "";
+  return reverse(str.substr(1)) + str[0];
+};
+
+/*Write a recursive function called isPalindrome which returns true if the string passed to 
+it is a palindrome (reads the same forward and backward). Otherwise it returns false.*/
+
+// first attempt
+const isPalindrome = (str) => {
+  let counter = 1;
+  const helper = (helperInput) => {
+    if (str.length === counter) return true;
+    if (helperInput !== str[counter - 1]) return false;
+    counter++;
+    return helper(str[str.length - counter]);
+  };
+
+  return helper(str[str.length - 1]);
+};
+
+// second attempt
+
+const isPalindromeTwo = (str) => {
+  // base case
+  if (str.length === 0) return true;
+  if (str[0] !== str[str.length - 1]) return false;
+  return isPalindromeTwo(str.slice(1, -1));
+};
+
+/* Write a recursive function called someRecursive which accepts an array and a callback. 
+The function returns true if a single value in the array returns true when passed to the callback. Otherwise it returns false */
+
+const someRecursive = (arr, callback) => {
+  if (arr.length === 0) return false;
+  if (callback(arr[0])) return true;
+  return someRecursive(arr.slice(1), callback);
+};
+
+/*Write a recursive function called flatten which accepts an array of arrays and returns a new array with all values flattened. */
+
+// the normal way and we can also use the flat method
+const flatten = (arrOfArr) => {
+  return arrOfArr
+    .join("")
+    .split(",")
+    .map((value) => parseInt(value));
+};
+
+// the recursive way for junior developers
+
+const flattenJun = (arr) => {
+  let newArray = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    //we check if the value is an array
+    if (Array.isArray(arr[i])) {
+      let flatten = flattenJun(arr[i]);
+      newArray = newArray.concat(flatten);
+    } else {
+      // if the value is a number
+      newArray.push(arr[i]);
+    }
+  }
+
+  return newArray;
+};
+
+// the recursive way for sunior developers
+
+const flattenSen = (arr) => {
+  let newArray = [];
+  arr.forEach((el) =>
+    Array.isArray(el)
+      ? (newArray = newArray.concat(flattenSen(el)))
+      : newArray.push(el)
+  );
+  return newArray;
+};
+
+c(flattenSen([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));

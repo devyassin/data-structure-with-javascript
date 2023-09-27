@@ -49,7 +49,7 @@ const binarySearchRecur = (arr, target) => {
 // search string naive implementation
 const searchString = (longerString, targetString) => {
   let counter = 0;
-  for (let i = 0; i < longerString.length; i++) {
+  for (let i = 0; i <= longerString.length - targetString.length; i++) {
     counter = 0;
 
     if (longerString[i] === targetString[0]) {
@@ -67,9 +67,52 @@ const searchString = (longerString, targetString) => {
 
 //KMP substring search  : time complexity O(m+n) with m length of longString and n length of targetString
 
-const buildPrefixTable = () => {};
+const buildPrefixTable = (targetString) => {
+  const table = [0];
+  let i = 1; // the index of the pointer
+  let lengthSuffix = 0; // the length of the repeated suffix prefix pair
 
-c(searchString("yassine lamouadden", "yassine lamouadden"));
+  while (i < targetString.length) {
+    // if the character at index i matches the character at index lengthSuffix
+    if (targetString[i] === targetString[lengthSuffix]) {
+      lengthSuffix++;
+      table[i] = lengthSuffix;
+      i++;
+    }
+    // if they didn't match and lengthSuffix>0
+    else if (lengthSuffix > 0) {
+      lengthSuffix = table[lengthSuffix - 1];
+    } else {
+      table[i] = 0;
+      i++;
+    }
+  }
+
+  return table;
+};
+
+const searchStringKmp = (string, subString) => {
+  if (subString === "") return false;
+
+  const prefixTable = buildPrefixTable(subString);
+
+  let i = 0;
+  let j = 0;
+  while (i < string.length && j < subString.length) {
+    if (string[i] === subString[j]) {
+      i++;
+      j++;
+    } else if (j > 0) {
+      j = prefixTable[j - 1];
+    } else {
+      i++;
+    }
+  }
+  if (j === subString.length) return true;
+  return false;
+};
+
+c(searchStringKmp("yassine lamouadden", "yassine lamouadden"));
 
 /* As a web developer, you may consider using the Knuth-Morris-Pratt (KMP) algorithm for substring searching in scenarios where you need to perform efficient and fast substring search operations on strings. Here are some situations where using the KMP algorithm or other efficient substring search algorithms might be beneficial:
 

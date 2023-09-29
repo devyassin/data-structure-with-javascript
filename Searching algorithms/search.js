@@ -65,6 +65,7 @@ const searchString = (longerString, targetString) => {
   else return false;
 };
 
+//link of theory demonstration https://www.youtube.com/watch?v=mAqsI9Jw1RI
 //KMP substring search  : time complexity O(m+n) with m length of longString and n length of targetString
 
 const buildPrefixTable = (targetString) => {
@@ -108,8 +109,8 @@ const searchStringKmp = (string, subString) => {
       i++;
     }
   }
-  if (j === subString.length) return true;
-  return false;
+
+  return j === subString.length ? true : false;
 };
 
 c(searchStringKmp("yassine lamouadden", "yassine lamouadden"));

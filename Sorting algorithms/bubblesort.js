@@ -4,7 +4,7 @@ function c() {
   console.log.apply(console, arguments);
 }
 
-// bubble sort implementation
+// bubble sort implementation ( not good for big datasets )
 
 const bubbleSortArr = (arr) => {
   let temp = 0;
@@ -31,4 +31,4 @@ const bubbleSortArrRecursive = (arr, n) => {
   return bubbleSortArrRecursive(arr, n - 1);
 };
 
-c(bubbleSortArrRecursive([5, 6, 2, 10, 4, 1, 8],7));
+c(bubbleSortArrRecursive([5, 6, 2, 10, 4, 1, 8], 7));

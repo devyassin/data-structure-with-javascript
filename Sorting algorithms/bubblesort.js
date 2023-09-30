@@ -5,6 +5,7 @@ function c() {
 }
 
 // bubble sort implementation ( not good for big datasets )
+// demonstration video : https://www.youtube.com/watch?v=Dv4qLJcxus8
 
 const bubbleSortArr = (arr) => {
   let temp = 0;

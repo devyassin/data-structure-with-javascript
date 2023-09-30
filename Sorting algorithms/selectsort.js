@@ -5,7 +5,7 @@ function c() {
 }
 
 // select sort implementation
-
+// demonstration video : https://www.youtube.com/watch?v=EwjnF7rFLns
 const selectSortArr = (arr) => {
   let temp = 0;
   while (temp < arr.length - 1) {
